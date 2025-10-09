@@ -20,7 +20,7 @@ if(isset($_POST['add'])){
     if($db->query->num_rows > 0){
         $db->setalert("warning","Already have this movie.");
     }else{
-        $time = "$hr : $mins";
+        $time = "$hr hr $mins mins";
         $list =[
             'movie_name' => $title,
             'duration' => $time,

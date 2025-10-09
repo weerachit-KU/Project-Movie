@@ -102,7 +102,7 @@ if (isset($_POST['register'])) {
                                 <input type="submit" value="  Register  " name="register" class="mb-3 mt-4 ms-3 fw-bold " id="lb">
                         </form>
                         <hr>
-                        <p class = "h-4 text-center">if you already have a account <a href="./login.php" onclick="return confirm('You want to go Login?')" id = "br" style="">Login</a></p>
+                        <p class = "h-4 text-center">if you already have an account <a href="./login.php" onclick="return confirm('You want to go Login?')" id = "br" style="">Login</a></p>
                     </div>
                 </div>
             </div>
