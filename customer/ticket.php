@@ -14,7 +14,7 @@
                     <div class="mt-3">
                         <div class="row mb-2">
                             <div class="col">
-                                <table class = "table">
+                                <table class = "table text-center">
                                     <thead>
                                         <tr>
                                         <th scope="col">Number</th>
@@ -22,6 +22,7 @@
                                         <th scope="col">Date</th>
                                         <th scope="col">duration</th>
                                         <th scope="col">Pirce</th>
+                                        <th scope="col">Seat</th>
                                         </tr>
                                     </thead>
                                     <?php
@@ -29,16 +30,26 @@
                                     $userid = $_SESSION['userid'];
                                     $db2->select("payment,movie","*","user_id = '$userid' AND movie.movie_id = payment.movie_id");
                                     $i = 0;
+                                    if($db2->query->num_rows > 0){
                                     while($ticket = $db2->query->fetch_object()){
                                         $i++
                                     ?>
                                         <tbody>
                                             <tr>
-                                            <th scope="row"><?= $i ?></th>
-                                            <td><?= $ticket->movie_name ?></td>
-                                            <td><?= $ticket->date ?></td>
-                                            <td><?= $ticket->duration ?></td>
-                                            <td><?= $ticket->price ?> ฿</td>
+                                                <th scope="row"><?= $i ?></th>
+                                                <td><?= $ticket->movie_name ?></td>
+                                                <td><?= $ticket->date ?></td>
+                                                <td><?= $ticket->duration ?></td>
+                                                <td><?= $ticket->price ?> ฿</td>
+                                                <td><?= $ticket->seat ?></td>
+                                            </tr>
+                                        </tbody>
+                                    <?php }
+                                            }else{
+                                        ?>
+                                        <tbody>
+                                            <tr>
+                                            <td colspan = "6" class = "text-center fw-bold text-muted">--- You don't have any Tickets ---</td>
                                             </tr>
                                         </tbody>
                                     <?php } ?>

@@ -10,6 +10,7 @@ if(isset($_POST['add'])){
     $hr = $_POST['hr'];
     $mins = $_POST['mins'];
     $date = $_POST['date'];
+    $time_1 = $_POST['time'];
     $file = $_FILES['img'];
     if ($file['name'] != '') {
         $img = $db->uploadimg($file);
@@ -25,6 +26,7 @@ if(isset($_POST['add'])){
             'movie_name' => $title,
             'duration' => $time,
             'date' => $date,
+            'time' => $time_1,
             'pictures' => $img
         ];
         $db->insert("movie",$list);

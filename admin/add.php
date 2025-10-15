@@ -27,7 +27,7 @@
                             <div class="col-6">
                                 <div class="input-group mt-4">
                                     <div class="input-group-text">hr</div>
-                                    <input type="number" class="form-control bg-light" name = "hr" min = "1" max ="5" name="" required>
+                                    <input type="number" class="form-control bg-light" name = "hr" min = "1" max ="2" name="" required>
                                     <div class="input-group-text">mins</div>
                                     <input type="number" class="form-control bg-light" name = "mins" min = "1" max ="59" name="" required>
                                 </div>
@@ -38,6 +38,16 @@
                                     <input type="date" name="date" class="form-control bg-light" style="" placeholder="Title" required>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mt-4">
+                                    <div class="input-group-text">Time</div>
+                                    <select name="time" id="" class = "form-control">
+                                        <option selected value="10:00-13:00">10:00-13:00</option>
+                                        <option value="16:00-19:00">16:00-19:00</option>
+                                        <option value="19:00-22:00">19:00-22:00</option>
+                                    </select>
+                                </div>
                         </div>
                         <div class="row">
                             <div class="input-group mt-4">
