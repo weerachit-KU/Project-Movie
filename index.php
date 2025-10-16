@@ -19,6 +19,5 @@ header("location:./system/login.php");
     }
 </style>
 <body>
-    
 </body>
 </html>

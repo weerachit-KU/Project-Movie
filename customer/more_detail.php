@@ -169,8 +169,8 @@ if (isset($_POST['selectedSeatsSilver'])) {
                 }
                 for ($row = $start; $row <= $end; $row++) {
                     echo "<div class='seat-container'>";
-                    $silverSeats = 6;
-                    for ($i = 1; $i <= $silverSeats; $i++) {
+                    $Seats = 6;
+                    for ($i = 1; $i <= $Seats; $i++) {
                         $seatNum = $row . $i;
 
                         // $isOccupied = false; // Randomly occupy seats
@@ -199,7 +199,6 @@ if (isset($_POST['selectedSeatsSilver'])) {
                 <button type="button" class="text-end" id="pay" onclick="proceedToPayment()">Confirm and Pay</button>
                 <form id="paymentForm" action="<?php echo $_SERVER["PHP_SELF"]; ?>?movie_id=<?= $id ?>" method="POST" style="display: none;">
                     <input type="hidden" name="selectedSeatsSilver" id="formSelectedSeatsSilver">
-                    <input type="hidden" name="selectedSeatsGold" id="formSelectedSeatsGold">
                     <input type="hidden" name="totalPrice" id="formTotalPrice">
                     <input type="hidden" name="show_id" id="formuserId" value="<?= $id; ?>">
                 </form>
@@ -209,8 +208,7 @@ if (isset($_POST['selectedSeatsSilver'])) {
 </body>
 <script>
     let selectedSeatssilver = [];
-    let selectedSeatsgold = [];
-    let selectedseats = []
+    let selectedseats = [];
     let totalPrice = 0;
 
     function selectSeatsilver(element) {

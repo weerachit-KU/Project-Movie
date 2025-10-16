@@ -21,7 +21,6 @@ $db->checklogin();
     body {
         background-color: #2E3440;
     }
-
     #movie-text {
         margin-top: 90px;
         align-items: start;

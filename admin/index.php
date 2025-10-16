@@ -17,26 +17,42 @@ if(isset($_POST['add'])){
     } else {
         $img = "default.jpg";
     }
-    $add = $db->select("movie","*","movie_name = '$title'");
+    $db->select("movie","*","movie_name = '$title'");
     if($db->query->num_rows > 0){
         $db->setalert("warning","Already have this movie.");
+        return;
     }else{
-        $time = "$hr hr $mins mins";
-        $list =[
-            'movie_name' => $title,
-            'duration' => $time,
-            'date' => $date,
-            'time' => $time_1,
-            'pictures' => $img
-        ];
-        $db->insert("movie",$list);
-        if ($db->query) {
-            $db->setalert("success", "Add movie Successfully!");
+        $db2 = new db();
+        $db2->select("movie","*","date = '$date'");
+        if($db2->query->num_rows > 0){
+            $db->setalert("warning","Already have this movie on that date.");
             return;
-        } else {
-            $db->setalert("error", "Something Error on code!");
-            return;
+        }else{
+            $db3 = new db();
+            $time = "$hr hr $mins mins";
+            $db3->select("movie","*","time = '$time'");
+            if($db3->query->num_rows > 0){
+                $db->setalert("warning","Already have this movie on that time.");
+                return;
+            }else{
+                $list =[
+                    'movie_name' => $title,
+                    'duration' => $time,
+                    'date' => $date,
+                    'time' => $time_1,
+                    'pictures' => $img
+                ];
+                $db->insert("movie",$list);
+                if ($db->query) {
+                    $db->setalert("success", "Add movie Successfully!");
+                    return;
+                } else {
+                    $db->setalert("error", "Something Error on code!");
+                    return;
+                }
+            }
         }
+
     }
 }
 if(isset($_POST['remove'])){
@@ -158,7 +174,7 @@ if(isset($_POST['remove'])){
                     <label for="" class="fw-bold fs-2"><?= $fetch->movie_name ?></label><br>
                     <label for="" class="fw-bold fs-6 text-muted ">Date <?= $fetch->date ?></label>
                     <hr>
-                    <input type="submit" value="More Detail" id = "detail" disabled>
+                    <!-- <input type="submit" value="More Detail" id = "detail" disabled> -->
                 </div>
             </div>
             <?php } ?>

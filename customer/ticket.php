@@ -21,6 +21,7 @@
                                         <th scope="col">Movie Name</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">duration</th>
+                                        <th scope="col">Time</th>
                                         <th scope="col">Pirce</th>
                                         <th scope="col">Seat</th>
                                         </tr>
@@ -40,6 +41,7 @@
                                                 <td><?= $ticket->movie_name ?></td>
                                                 <td><?= $ticket->date ?></td>
                                                 <td><?= $ticket->duration ?></td>
+                                                <td><?= $ticket->time ?></td>
                                                 <td><?= $ticket->price ?> ฿</td>
                                                 <td><?= $ticket->seat ?></td>
                                             </tr>
@@ -49,7 +51,7 @@
                                         ?>
                                         <tbody>
                                             <tr>
-                                            <td colspan = "6" class = "text-center fw-bold text-muted">--- You don't have any Tickets ---</td>
+                                            <td colspan = "7" class = "text-center fw-bold text-muted">--- You don't have any Tickets ---</td>
                                             </tr>
                                         </tbody>
                                     <?php } ?>

@@ -84,7 +84,7 @@ if (isset($_POST['register'])) {
                         <p class="text-center mt-3 fs-2 fw-bold" >Register</p>
                         <form action="" method="post">
                                 <div class="input-group mt-4">
-                                    <div class="input-group-text"><img src="./../icon/user.png" alt=""></div>    
+                                    <div class="input-group-text"><img src="./../icon/user.png" alt=""></div>
                                     <input type="text" name="username" class="form-control bg-light" style="" placeholder="Username" required>
                                 </div>
                                 <div class="input-group mt-2">
