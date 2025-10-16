@@ -2,10 +2,10 @@
 session_start();
 include("../db.php");
 $db = new db();
-if($_SESSION['typeuser'] != 'admin'){
+if ($_SESSION['typeuser'] != 'admin') {
     header('location:./../system/logout.php');
 }
-if(isset($_POST['add'])){
+if (isset($_POST['add'])) {
     $title = $_POST['title'];
     $hr = $_POST['hr'];
     $mins = $_POST['mins'];
@@ -17,47 +17,39 @@ if(isset($_POST['add'])){
     } else {
         $img = "default.jpg";
     }
-    $db->select("movie","*","movie_name = '$title'");
-    if($db->query->num_rows > 0){
-        $db->setalert("warning","Already have this movie.");
+    $db->select("movie", "*", "movie_name = '$title' AND date = '$date'");
+    if ($db->query->num_rows > 0) {
+        $db->setalert("warning", "Already have this movie.");
         return;
-    }else{
-        $db2 = new db();
-        $db2->select("movie","*","date = '$date'");
-        if($db2->query->num_rows > 0){
-            $db->setalert("warning","Already have this movie on that date.");
+    } else {
+        $db3 = new db();
+        $time = "$hr hr $mins mins";
+        $db3->select("movie", "*", "time = '$time_1' AND date = '$date'");
+        if ($db3->query->num_rows > 0) {
+            $db->setalert("warning", "Already have this movie on that time.");
             return;
-        }else{
-            $db3 = new db();
-            $time = "$hr hr $mins mins";
-            $db3->select("movie","*","time = '$time'");
-            if($db3->query->num_rows > 0){
-                $db->setalert("warning","Already have this movie on that time.");
+        } else {
+            $list = [
+                'movie_name' => $title,
+                'duration' => $time,
+                'date' => $date,
+                'time' => $time_1,
+                'pictures' => $img
+            ];
+            $db->insert("movie", $list);
+            if ($db->query) {
+                $db->setalert("success", "Add movie Successfully!");
                 return;
-            }else{
-                $list =[
-                    'movie_name' => $title,
-                    'duration' => $time,
-                    'date' => $date,
-                    'time' => $time_1,
-                    'pictures' => $img
-                ];
-                $db->insert("movie",$list);
-                if ($db->query) {
-                    $db->setalert("success", "Add movie Successfully!");
-                    return;
-                } else {
-                    $db->setalert("error", "Something Error on code!");
-                    return;
-                }
+            } else {
+                $db->setalert("error", "Something Error on code!");
+                return;
             }
         }
-
     }
 }
-if(isset($_POST['remove'])){
+if (isset($_POST['remove'])) {
     $movie_id = $_POST['movie_id'];
-    $db->delete("movie","movie_id = '$movie_id'");
+    $db->delete("movie", "movie_id = '$movie_id'");
     if ($db->query) {
         $db->setalert("error", "Remove movie Successfully!");
         return;
@@ -92,60 +84,69 @@ if(isset($_POST['remove'])){
         font-weight: bold;
         border-radius: 5px;
     }
-    #buadd{
+
+    #buadd {
         border-radius: 5px;
         background-color: #49D640;
-        color:white;
+        color: white;
         font-weight: bold;
     }
-    #buadd:hover{
+
+    #buadd:hover {
         background-color: #68A667;
-        color:white;
+        color: white;
     }
-    #bremove{
+
+    #bremove {
         border-radius: 5px;
         background-color: #D62F2F;
-        color:white;
+        color: white;
         font-weight: bold;
     }
-    #bremove:hover{
+
+    #bremove:hover {
         border-radius: 5px;
         background-color: #521919;
-        color:white;
+        color: white;
         font-weight: bold;
     }
-    #detail{
+
+    #detail {
         text-align: center;
         align-items: center;
-        background-color:#6B6B6B;
+        background-color: #6B6B6B;
         font-weight: bold;
-        color:white;
+        color: white;
         border-radius: 10px;
         padding: 5px;
     }
-    #detail:hover{
+
+    #detail:hover {
         text-align: center;
         align-items: center;
-        background-color:#191919;
+        background-color: #191919;
         font-weight: bold;
-        color:white;
+        color: white;
         border-radius: 10px;
         padding: 5px;
     }
+
     #product_img {
         transition: transform 0.6s ease;
-        height:250px;
-        width:240px;
+        height: 250px;
+        width: 240px;
     }
 
     #product_img:hover {
         transform: scale(1.03);
     }
-    #card{
+
+    #card {
         background-color: #CFC4C4;
         transition: transform 0.6s ease;
     }
-    #card:hover{
+
+    #card:hover {
         transform: scale(1.03);
     }
 </style>
@@ -164,19 +165,19 @@ if(isset($_POST['remove'])){
             <div class="col-4"></div>
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-            <?php 
-                $db->select("movie","*");
-                while($fetch = $db->query->fetch_object()){
+            <?php
+            $db->select("movie", "*");
+            while ($fetch = $db->query->fetch_object()) {
             ?>
-            <div class="card col-2 col-md-4 col-lg-3 m-3" id="card" style="width: 18rem;">
-                <img src="./../movie_img/<?= $fetch->pictures ?>" id="product_img" style=" object-fit:cover;" class=" mt-3 rounded img-fluid ">
-                <div class="card-body">
-                    <label for="" class="fw-bold fs-2"><?= $fetch->movie_name ?></label><br>
-                    <label for="" class="fw-bold fs-6 text-muted ">Date <?= $fetch->date ?></label>
-                    <hr>
-                    <!-- <input type="submit" value="More Detail" id = "detail" disabled> -->
+                <div class="card col-2 col-md-4 col-lg-3 m-3" id="card" style="width: 18rem;">
+                    <img src="./../movie_img/<?= $fetch->pictures ?>" id="product_img" style=" object-fit:cover;" class=" mt-3 rounded img-fluid ">
+                    <div class="card-body">
+                        <label for="" class="fw-bold fs-2"><?= $fetch->movie_name ?></label><br>
+                        <label for="" class="fw-bold fs-6 text-muted ">Date <?= $fetch->date ?></label>
+                        <hr>
+                        <!-- <input type="submit" value="More Detail" id = "detail" disabled> -->
+                    </div>
                 </div>
-            </div>
             <?php } ?>
         </div>
     </div>
