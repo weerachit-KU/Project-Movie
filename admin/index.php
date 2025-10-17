@@ -173,7 +173,8 @@ if (isset($_POST['remove'])) {
                     <img src="./../movie_img/<?= $fetch->pictures ?>" id="product_img" style=" object-fit:cover;" class=" mt-3 rounded img-fluid ">
                     <div class="card-body">
                         <label for="" class="fw-bold fs-2"><?= $fetch->movie_name ?></label><br>
-                        <label for="" class="fw-bold fs-6 text-muted ">Date <?= $fetch->date ?></label>
+                        <label for="" class="fw-bold fs-6 text-muted ">Date <?= $fetch->date ?></label><br>
+                        <label for="" class="fw-bold fs-6 text-muted ">Time <?= $fetch->time ?></label>
                         <hr>
                         <!-- <input type="submit" value="More Detail" id = "detail" disabled> -->
                     </div>

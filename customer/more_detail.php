@@ -184,7 +184,7 @@ if (isset($_POST['selectedSeatsSilver'])) {
                     <div class="col-4"></div>
                     <div class="col-4"></div>
                     <div class="col-4 text-end">
-                        <div class="fw-bold fs-5" style="color:white;">Total Price: <span id="totalPrice">Bath. 0 ฿</span></div>
+                        <div class="fw-bold fs-5" style="color:white;">Total Price: <span id="totalPrice"> 0 Bath.</span></div>
                     </div>
                 </div>
             </div>
@@ -227,7 +227,7 @@ if (isset($_POST['selectedSeatsSilver'])) {
             totalPrice += price;
         }
 
-        document.getElementById('totalPrice').textContent = `Bath. ${totalPrice} ฿`;
+        document.getElementById('totalPrice').textContent = ` ${totalPrice} Bath.`;
     }
 
     function proceedToPayment() {
